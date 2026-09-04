@@ -1,0 +1,15 @@
+# Tajni podaci
+.env
+
+# Virtuelno okruženje
+.venv/
+
+# PyCharm
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Dataset se ponovo preuzima skriptom
+data/raw/
