@@ -1,0 +1,4 @@
+﻿defense_mode,accepted_documents,rejected_documents,true_positives,false_positives,false_negatives,true_negatives,detection_precision,detection_recall,detection_f1,false_positive_rate,poison_retrieval_asr_at_1,poison_retrieval_asr_at_5,gold_recall_at_1,gold_recall_at_5,end_to_end_accuracy,utility_drop_from_clean,raw_target_answer_rate,attack_induced_asr,induced_successes,eligible_questions,defense_latency_seconds
+no_defense,1100,0,0,0,100,1000,0,0.0,0,0.0,0.84,1.0,0.16,1.0,0.17,0.6,0.83,0.7792207792207793,60,77,0.000343
+pmid_allowlist,1100,0,0,0,100,1000,0,0.0,0,0.0,0.84,1.0,0.16,1.0,0.17,0.6,0.83,0.7792207792207793,60,77,0.000475
+content_hash_verification,1000,100,100,0,0,1000,1.0,1.0,1.0,0.0,0.0,0.0,0.98,1.0,0.77,0.0,0.23,0.0,0,77,0.055026

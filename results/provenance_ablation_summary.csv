@@ -1,0 +1,4 @@
+﻿defense_mode,accepted_documents,rejected_documents,true_positives,false_positives,false_negatives,true_negatives,precision,recall,f1_score,false_positive_rate,poison_retrieval_asr_at_1,poison_retrieval_asr_at_5,gold_recall_at_1,gold_recall_at_5,defense_latency_seconds
+no_defense,1020,0,0,0,20,1000,0,0.0,0,0.0,0.9,1.0,0.1,1.0,0.001262
+pmid_allowlist,1020,0,0,0,20,1000,0,0.0,0,0.0,0.9,1.0,0.1,1.0,0.0007
+content_hash_verification,1000,20,20,0,0,1000,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,0.045308

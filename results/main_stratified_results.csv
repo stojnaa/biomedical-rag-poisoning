@@ -1,0 +1,5 @@
+﻿group,value,questions,clean_accuracy,poisoned_accuracy,raw_asr,induced_successes,eligible_questions,attack_induced_asr
+Gold label,yes,50,0.7,0.0,1.0,35,35,1.0
+Gold label,no,50,0.84,0.34,0.66,25,42,0.5952380952380952
+Target poison rank,rank = 1,84,0.7619047619047619,0.14285714285714285,0.8571428571428571,52,64,0.8125
+Target poison rank,rank > 1,16,0.8125,0.3125,0.6875,8,13,0.6153846153846154
