@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Main attack results on 100 held-out PubMedQA questions.}
+\label{tab:main-results}
+\begin{tabular}{lrr}
+\hline
+Metric & Result & 95\% CI \\
+\hline
+Clean RAG accuracy & 77.0\% & [67.8, 84.2]\% \\
+Poisoned RAG accuracy & 17.0\% & [10.9, 25.5]\% \\
+Poison Retrieval ASR@1 & 84.0\% & [75.6, 89.9]\% \\
+Poison Retrieval ASR@5 & 100.0\% & [96.3, 100.0]\% \\
+Raw generation ASR & 83.0\% & [74.5, 89.1]\% \\
+Attack-induced ASR & 77.9\% & [67.5, 85.7]\% \\
+\hline
+\end{tabular}
+\end{table}

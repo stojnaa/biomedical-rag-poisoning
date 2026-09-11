@@ -193,7 +193,7 @@ def main():
         / len(corpus)
     )
 
-    print("Broj dokumenata u bazi:", len(corpus))
+    print("Corpus documents:", len(corpus))
     print(
         "Prosečna dužina dokumenta:",
         round(average_document_length, 2),
@@ -287,7 +287,7 @@ def main():
     print(f"Recall@1: {recall_at_1:.2%}")
     print(f"Recall@5: {recall_at_5:.2%}")
     print(f"MRR: {mean_reciprocal_rank:.4f}")
-    print("Rezultati:", OUTPUT_PATH)
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

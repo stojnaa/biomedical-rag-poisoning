@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Attack results stratified by label and retrieval conditions.}
+\label{tab:stratified-results}
+\begin{tabular}{llrrr}
+\hline
+Group & Value & $N$ & Raw ASR & Induced ASR \\
+\hline
+Gold label & yes & 50 & 100.0\% & 100.0\% \\
+Gold label & no & 50 & 66.0\% & 59.5\% \\
+Target poison rank & rank = 1 & 84 & 85.7\% & 81.2\% \\
+Target poison rank & rank > 1 & 16 & 68.8\% & 61.5\% \\
+Poisons in top 5 & one & 64 & 82.8\% & 75.6\% \\
+Poisons in top 5 & multiple & 36 & 83.3\% & 81.2\% \\
+\hline
+\end{tabular}
+\end{table}

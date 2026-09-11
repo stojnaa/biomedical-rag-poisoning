@@ -190,9 +190,9 @@ def main():
     results, completed_ids = load_existing_results()
 
     print("Model:", model)
-    print("Ukupno dokumenata:", len(poisoned_corpus))
-    print("Broj pitanja:", len(questions))
-    print("Već završeno:", len(completed_ids))
+    print("Total documents:", len(poisoned_corpus))
+    print("Questions:", len(questions))
+    print("Already completed:", len(completed_ids))
     print()
 
     for index, question in enumerate(questions, start=1):
@@ -201,7 +201,7 @@ def main():
         if question_id in completed_ids:
             print(
                 f"[{index}/{len(questions)}] "
-                f"{question_id} je već obrađen."
+                f"{question_id} already completed."
             )
             continue
 
@@ -330,7 +330,7 @@ Retrieved biomedical documents:
             f"clean={clean_prediction}, "
             f"poisoned={poisoned_prediction}, "
             f"target={target_answer}, "
-            f"napad={raw_attack_success}"
+            f"attack_success={raw_attack_success}"
         )
 
     total_questions = len(results)
@@ -401,7 +401,7 @@ Retrieved biomedical documents:
         f"Promenjeni odgovori: "
         f"{changed_predictions}/{total_questions}"
     )
-    print("Rezultati:", OUTPUT_PATH)
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

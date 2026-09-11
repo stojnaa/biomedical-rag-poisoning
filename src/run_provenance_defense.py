@@ -310,20 +310,20 @@ def main():
             f"[{index}/{len(questions)}] "
             f"{question['question_id']}: "
             f"original rank={gold_rank}, "
-            f"poison prisutan={poison_present}"
+            f"poison present={poison_present}"
         )
 
     save_results(results)
 
     print()
-    print("Ukupno kandidata:", len(candidates))
-    print("Prihvaćeni dokumenti:", len(accepted_documents))
-    print("Odbačeni dokumenti:", len(rejected_documents))
+    print("Candidate documents:", len(candidates))
+    print("Accepted documents:", len(accepted_documents))
+    print("Rejected documents:", len(rejected_documents))
     print()
-    print("TP - otkriveni poisons:", true_positives)
-    print("FP - pogrešno odbačeni čisti:", false_positives)
-    print("FN - neotkriveni poisons:", false_negatives)
-    print("TN - prihvaćeni čisti:", true_negatives)
+    print("TP - detected poisons:", true_positives)
+    print("FP - rejected clean documents:", false_positives)
+    print("FN - undetected poisons:", false_negatives)
+    print("TN - accepted clean documents:", true_negatives)
     print()
     print(f"Defense precision: {precision:.2%}")
     print(f"Defense recall: {recall:.2%}")
@@ -334,10 +334,10 @@ def main():
     )
     print(
         f"Defense latency: "
-        f"{defense_latency:.6f} sekundi"
+        f"{defense_latency:.6f} seconds"
     )
-    print("Filtrirana baza:", len(filtered_corpus))
-    print("Rezultati:", OUTPUT_PATH)
+    print("Filtered corpus:", len(filtered_corpus))
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

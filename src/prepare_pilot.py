@@ -131,23 +131,23 @@ def main():
         record["correct_answer"] for record in pilot_records
     )
 
-    print("Ukupan broj PubMedQA pitanja:", len(records))
-    print("Raspodela celog dataseta:", dict(all_labels))
+    print("Total PubMedQA questions:", len(records))
+    print("Full dataset label distribution:", dict(all_labels))
     print()
-    print("Broj pilot pitanja:", len(pilot_records))
-    print("Raspodela pilot skupa:", dict(pilot_labels))
+    print("Pilot questions:", len(pilot_records))
+    print("Pilot label distribution:", dict(pilot_labels))
     print()
     print("CSV:", CSV_OUTPUT_PATH)
     print("JSON:", JSON_OUTPUT_PATH)
     print()
-    print("Prva tri pitanja:")
+    print("First three questions:")
 
     for record in pilot_records[:3]:
         print("-" * 60)
         print("ID:", record["question_id"])
         print("PMID:", record["pmid"])
-        print("Pitanje:", record["question"])
-        print("Tačan odgovor:", record["correct_answer"])
+        print("Question:", record["question"])
+        print("Correct answer:", record["correct_answer"])
 
 
 if __name__ == "__main__":

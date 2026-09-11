@@ -140,16 +140,16 @@ def main():
     results, completed_ids = load_existing_results()
 
     print("Model:", model)
-    print("Broj dokumenata:", len(corpus))
-    print("Broj pitanja:", len(questions))
-    print("Već završeno:", len(completed_ids))
+    print("Documents:", len(corpus))
+    print("Questions:", len(questions))
+    print("Already completed:", len(completed_ids))
     print()
 
     for index, item in enumerate(questions, start=1):
         question_id = item["question_id"]
 
         if question_id in completed_ids:
-            print(f"[{index}/20] {question_id} je već obrađen.")
+            print(f"[{index}/20] {question_id} already completed.")
             continue
 
         ranked_documents = retrieve(
@@ -236,9 +236,9 @@ Retrieved biomedical documents:
         print(
             f"[{index}/{len(questions)}] {question_id}: "
             f"rank={relevant_rank}, "
-            f"tačno={correct_answer}, "
-            f"model={predicted_answer}, "
-            f"uspeh={result['is_correct']}"
+            f"correct={correct_answer}, "
+            f"predicted={predicted_answer}, "
+            f"success={result['is_correct']}"
         )
 
     correct_count = sum(
@@ -259,12 +259,12 @@ Retrieved biomedical documents:
     )
 
     print()
-    print("Završena pitanja:", len(results))
-    print("Tačni odgovori:", correct_count)
+    print("Completed questions:", len(results))
+    print("Correct predictions:", correct_count)
     print(f"Clean RAG accuracy: {accuracy:.2%}")
-    print("Ulazni tokeni:", total_input_tokens)
-    print("Izlazni tokeni:", total_output_tokens)
-    print("Rezultati:", OUTPUT_PATH)
+    print("Input tokens:", total_input_tokens)
+    print("Output tokens:", total_output_tokens)
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

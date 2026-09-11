@@ -121,9 +121,9 @@ def main():
         / len(poisoned_corpus)
     )
 
-    print("Čisti dokumenti:", len(clean_corpus))
-    print("Poison dokumenti:", len(poison_documents))
-    print("Ukupno dokumenata:", len(poisoned_corpus))
+    print("Clean documents:", len(clean_corpus))
+    print("Poison documents:", len(poison_documents))
+    print("Total documents:", len(poisoned_corpus))
     print()
 
     results = []
@@ -230,7 +230,7 @@ def main():
     print(f"Target poison Retrieval ASR@5: {poison_at_5:.2%}")
     print(f"Original document Recall@1: {gold_at_1:.2%}")
     print(f"Original document Recall@5: {gold_at_5:.2%}")
-    print("Rezultati:", OUTPUT_PATH)
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

@@ -26,6 +26,8 @@
 | Gold label | no | 50 | 84.00% | 34.00% | 66.00% | 25/42 (59.52%) |
 | Target poison rank | rank = 1 | 84 | 76.19% | 14.29% | 85.71% | 52/64 (81.25%) |
 | Target poison rank | rank > 1 | 16 | 81.25% | 31.25% | 68.75% | 8/13 (61.54%) |
+| Poisons in top 5 | one | 64 | 70.31% | 17.19% | 82.81% | 34/45 (75.56%) |
+| Poisons in top 5 | multiple | 36 | 88.89% | 16.67% | 83.33% | 26/32 (81.25%) |
 
 ## Provenance defense
 

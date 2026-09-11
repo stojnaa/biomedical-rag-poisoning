@@ -167,9 +167,9 @@ def main():
         groups.append(stratum("Gold label", label, [r for r in poisoned if r["correct_answer"] == label]))
     groups.append(stratum("Target poison rank", "rank = 1", [r for r in poisoned if int(float(r["target_poison_rank"])) == 1]))
     groups.append(stratum("Target poison rank", "rank > 1", [r for r in poisoned if int(float(r["target_poison_rank"])) > 1]))
-    if "poison_documents_in_top_5" in poisoned[0]:
-        groups.append(stratum("Poisons in top 5", "one", [r for r in poisoned if int(float(r["poison_documents_in_top_5"])) == 1]))
-        groups.append(stratum("Poisons in top 5", "multiple", [r for r in poisoned if int(float(r["poison_documents_in_top_5"])) > 1]))
+    if "number_of_poisons_in_top_5" in poisoned[0]:
+        groups.append(stratum("Poisons in top 5", "one", [r for r in poisoned if int(float(r["number_of_poisons_in_top_5"])) == 1]))
+        groups.append(stratum("Poisons in top 5", "multiple", [r for r in poisoned if int(float(r["number_of_poisons_in_top_5"])) > 1]))
 
     drop = clean_correct / len(clean) - poisoned_correct / len(poisoned)
     drop_ci = bootstrap_drop(clean, poisoned_by_id)

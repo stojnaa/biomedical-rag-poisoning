@@ -1,8 +1,9 @@
-# Tajni podaci
+# Secrets
 .env
 
-# Virtuelno okruženje
+# Virtual environments
 .venv/
+venv/
 
 # PyCharm
 .idea/
@@ -10,6 +11,10 @@
 # Python
 __pycache__/
 *.pyc
+.pytest_cache/
 
-# Dataset se ponovo preuzima skriptom
+# Raw data is downloaded by the project script
 data/raw/
+
+# Generated local artifacts
+*.log

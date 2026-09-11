@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this research artifact, please cite it using the metadata below."
+title: "Biomedical RAG Knowledge-Poisoning Evaluation"
+type: software
+authors:
+  - family-names: "Pušičić"
+    given-names: "Stojna"
+  - family-names: "Runtić"
+    given-names: "Marta"
+version: 1.0.0
+date-released: 2026-09-11
+keywords:
+  - retrieval-augmented generation
+  - data poisoning
+  - biomedical question answering
+  - provenance

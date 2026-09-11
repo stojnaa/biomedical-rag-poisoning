@@ -20,9 +20,9 @@ def main():
 
     OUTPUT_PATH.write_bytes(response.content)
 
-    print("PubMedQA je uspešno preuzet.")
-    print("Lokacija:", OUTPUT_PATH)
-    print("Veličina:", len(response.content), "bajtova")
+    print("PubMedQA downloaded successfully.")
+    print("Location:", OUTPUT_PATH)
+    print("Size:", len(response.content), "bytes")
 
 
 if __name__ == "__main__":

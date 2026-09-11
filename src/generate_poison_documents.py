@@ -72,8 +72,8 @@ def main():
     }
 
     print("Model:", model)
-    print("Broj pitanja:", len(questions))
-    print("Već generisano:", len(completed_ids))
+    print("Questions:", len(questions))
+    print("Already generated:", len(completed_ids))
     print()
 
     for index, item in enumerate(questions, start=1):
@@ -169,10 +169,10 @@ Requirements:
     )
 
     print()
-    print("Generisano dokumenata:", len(poison_documents))
-    print("Ulazni tokeni:", total_input_tokens)
-    print("Izlazni tokeni:", total_output_tokens)
-    print("Sačuvano:", OUTPUT_PATH)
+    print("Generated documents:", len(poison_documents))
+    print("Input tokens:", total_input_tokens)
+    print("Output tokens:", total_output_tokens)
+    print("Saved to:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":

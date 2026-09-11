@@ -94,15 +94,15 @@ def main():
     results, completed_ids = load_existing_results()
 
     print("Model:", model)
-    print("Ukupno pitanja:", len(questions))
-    print("Već završeno:", len(completed_ids))
+    print("Total questions:", len(questions))
+    print("Already completed:", len(completed_ids))
     print()
 
     for index, item in enumerate(questions, start=1):
         question_id = item["question_id"]
 
         if question_id in completed_ids:
-            print(f"[{index}/20] {question_id} je već obrađen.")
+            print(f"[{index}/20] {question_id} already completed.")
             continue
 
         prompt = f"""
@@ -155,9 +155,9 @@ Biomedical context:
 
         print(
             f"[{index}/20] {question_id}: "
-            f"tačno={correct_answer}, "
-            f"model={predicted_answer}, "
-            f"uspeh={is_correct}"
+            f"correct={correct_answer}, "
+            f"predicted={predicted_answer}, "
+            f"success={is_correct}"
         )
 
     correct_count = sum(
@@ -168,10 +168,10 @@ Biomedical context:
     accuracy = correct_count / len(results) if results else 0
 
     print()
-    print("Završena pitanja:", len(results))
-    print("Tačni odgovori:", correct_count)
+    print("Completed questions:", len(results))
+    print("Correct predictions:", correct_count)
     print(f"Accuracy: {accuracy:.2%}")
-    print("Rezultati:", OUTPUT_PATH)
+    print("Results:", OUTPUT_PATH)
 
 
 if __name__ == "__main__":
