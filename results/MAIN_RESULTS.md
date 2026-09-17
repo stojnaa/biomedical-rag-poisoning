@@ -7,6 +7,9 @@
 | Clean RAG accuracy | 77/100 (77.00%) | [67.85%, 84.16%] |
 | Poisoned RAG accuracy | 17/100 (17.00%) | [10.89%, 25.55%] |
 | Poison Retrieval ASR@1 | 84/100 (84.00%) | [75.58%, 89.90%] |
+| Poison Retrieval ASR@2 | 99/100 (99.00%) | [94.55%, 99.82%] |
+| Poison Retrieval ASR@3 | 100/100 (100.00%) | [96.30%, 100.00%] |
+| Poison Retrieval ASR@4 | 100/100 (100.00%) | [96.30%, 100.00%] |
 | Poison Retrieval ASR@5 | 100/100 (100.00%) | [96.30%, 100.00%] |
 | Raw generation ASR | 83/100 (83.00%) | [74.45%, 89.11%] |
 | Attack-induced ASR | 60/77 (77.92%) | [67.46%, 85.73%] |
@@ -31,11 +34,11 @@
 
 ## Provenance defense
 
-| Defense | Detection F1 | Poison ASR@1 | End-to-end accuracy | Utility drop | Attack-induced ASR |
-|---|---:|---:|---:|---:|---:|
-| no_defense | 0.00% | 84.00% | 17.00% | 60.00% | 77.92% |
-| pmid_allowlist | 0.00% | 84.00% | 17.00% | 60.00% | 77.92% |
-| content_hash_verification | 100.00% | 0.00% | 77.00% | 0.00% | 0.00% |
+| Defense | Detection F1 | Poison ASR@1 | Poison ASR@2 | Poison ASR@3 | Poison ASR@4 | Poison ASR@5 | End-to-end accuracy | Utility drop | Attack-induced ASR |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| no_defense | 0.00% | 84.00% | 99.00% | 100.00% | 100.00% | 100.00% | 17.00% | 60.00% | 77.92% |
+| pmid_allowlist | 0.00% | 84.00% | 99.00% | 100.00% | 100.00% | 100.00% | 17.00% | 60.00% | 77.92% |
+| content_hash_verification | 100.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 77.00% | 0.00% | 0.00% |
 
 ## Interpretation
 

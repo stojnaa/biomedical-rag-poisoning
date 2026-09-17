@@ -79,22 +79,58 @@ def create_attack_figure(summary):
         row["metric"]: 100 * float(row["value"])
         for row in summary
     }
-    labels = ["Retrieval\nASR@1", "Retrieval\nASR@5", "Raw\nASR", "Attack-induced\nASR"]
+
+    labels = [
+        "Retrieval\nASR@1",
+        "Retrieval\nASR@2",
+        "Retrieval\nASR@3",
+        "Retrieval\nASR@4",
+        "Retrieval\nASR@5",
+        "Raw\nASR",
+        "Attack-induced\nASR",
+    ]
+
     heights = [
         values["Poison Retrieval ASR@1"],
+        values["Poison Retrieval ASR@2"],
+        values["Poison Retrieval ASR@3"],
+        values["Poison Retrieval ASR@4"],
         values["Poison Retrieval ASR@5"],
         values["Raw generation ASR"],
         values["Attack-induced ASR"],
     ]
 
-    figure, axis = plt.subplots(figsize=(6.5, 3.8))
-    bars = axis.bar(labels, heights, color=[GRAY, GRAY, RED, RED], width=0.62)
+    colors = [
+        GRAY,
+        GRAY,
+        GRAY,
+        GRAY,
+        GRAY,
+        RED,
+        RED,
+    ]
+
+    figure, axis = plt.subplots(figsize=(9.2, 4.0))
+    bars = axis.bar(
+        labels,
+        heights,
+        color=colors,
+        width=0.65,
+    )
+
     style_axis(axis)
-    axis.set_title("Attack effectiveness", fontweight="bold", pad=12)
+    axis.set_title(
+        "Attack effectiveness across retrieval cutoffs",
+        fontweight="bold",
+        pad=12,
+    )
     add_labels(axis, bars)
     figure.tight_layout()
-    save_figure(figure, "fig2_attack_effectiveness")
 
+    save_figure(
+        figure,
+        "fig2_attack_effectiveness",
+    )
 
 def create_defense_figure(defense):
     display_names = {

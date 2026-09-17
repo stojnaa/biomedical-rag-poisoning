@@ -55,7 +55,30 @@ def main():
 
     clean_accuracy = sum(boolean(row["is_correct"]) for row in clean) / len(clean)
     poisoned_accuracy = sum(boolean(row["correct_after_attack"]) for row in poisoned) / len(poisoned)
-    retrieval_asr_1 = sum(boolean(row["target_poison_at_1"]) for row in retrieval) / len(retrieval)
+    retrieval_asr_1 = sum(
+        boolean(row["target_poison_at_1"])
+        for row in retrieval
+    ) / len(retrieval)
+
+    retrieval_asr_2 = sum(
+        boolean(row["target_poison_at_2"])
+        for row in retrieval
+    ) / len(retrieval)
+
+    retrieval_asr_3 = sum(
+        boolean(row["target_poison_at_3"])
+        for row in retrieval
+    ) / len(retrieval)
+
+    retrieval_asr_4 = sum(
+        boolean(row["target_poison_at_4"])
+        for row in retrieval
+    ) / len(retrieval)
+
+    retrieval_asr_5 = sum(
+        boolean(row["target_poison_at_5"])
+        for row in retrieval
+    ) / len(retrieval)
     raw_asr = sum(boolean(row["raw_attack_success"]) for row in poisoned) / len(poisoned)
     eligible = [row for row in poisoned if boolean(row["eligible_for_induced_attack"])]
     induced_asr = sum(boolean(row["induced_attack_success"]) for row in eligible) / len(eligible)
@@ -63,6 +86,10 @@ def main():
     require(close(clean_accuracy, 0.77), "Unexpected clean RAG accuracy.")
     require(close(poisoned_accuracy, 0.17), "Unexpected poisoned RAG accuracy.")
     require(close(retrieval_asr_1, 0.84), "Unexpected retrieval ASR@1.")
+    require(close(retrieval_asr_2, 0.99), "Unexpected retrieval ASR@2.")
+    require(close(retrieval_asr_3, 1.00), "Unexpected retrieval ASR@3.")
+    require(close(retrieval_asr_4, 1.00), "Unexpected retrieval ASR@4.")
+    require(close(retrieval_asr_5, 1.00), "Unexpected retrieval ASR@5.")
     require(close(raw_asr, 0.83), "Unexpected raw ASR.")
     require(close(induced_asr, 60 / 77), "Unexpected attack-induced ASR.")
 
@@ -78,6 +105,10 @@ def main():
     print(f"Clean RAG accuracy: {clean_accuracy:.2%}")
     print(f"Poisoned RAG accuracy: {poisoned_accuracy:.2%}")
     print(f"Retrieval ASR@1: {retrieval_asr_1:.2%}")
+    print(f"Retrieval ASR@2: {retrieval_asr_2:.2%}")
+    print(f"Retrieval ASR@3: {retrieval_asr_3:.2%}")
+    print(f"Retrieval ASR@4: {retrieval_asr_4:.2%}")
+    print(f"Retrieval ASR@5: {retrieval_asr_5:.2%}")
     print(f"Raw ASR: {raw_asr:.2%}")
     print(f"Attack-induced ASR: {induced_asr:.2%}")
     print("Content-hash defense restored clean accuracy with zero measured attack-induced ASR.")

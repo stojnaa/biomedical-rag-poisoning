@@ -147,8 +147,26 @@ def main():
 
     clean_correct = sum(boolean(row["is_correct"]) for row in clean)
     poisoned_correct = sum(boolean(row["correct_after_attack"]) for row in poisoned)
-    retrieval_1 = sum(boolean(row["target_poison_at_1"]) for row in retrieval)
-    retrieval_5 = sum(boolean(row["target_poison_at_5"]) for row in retrieval)
+    retrieval_1 = sum(
+        boolean(row["target_poison_at_1"])
+        for row in retrieval
+    )
+    retrieval_2 = sum(
+        boolean(row["target_poison_at_2"])
+        for row in retrieval
+    )
+    retrieval_3 = sum(
+        boolean(row["target_poison_at_3"])
+        for row in retrieval
+    )
+    retrieval_4 = sum(
+        boolean(row["target_poison_at_4"])
+        for row in retrieval
+    )
+    retrieval_5 = sum(
+        boolean(row["target_poison_at_5"])
+        for row in retrieval
+    )
     raw = sum(boolean(row["raw_attack_success"]) for row in poisoned)
     eligible = sum(boolean(row["eligible_for_induced_attack"]) for row in poisoned)
     induced = sum(boolean(row["induced_attack_success"]) for row in poisoned)
@@ -157,6 +175,9 @@ def main():
         metric("Clean RAG accuracy", clean_correct, len(clean)),
         metric("Poisoned RAG accuracy", poisoned_correct, len(poisoned)),
         metric("Poison Retrieval ASR@1", retrieval_1, len(retrieval)),
+        metric("Poison Retrieval ASR@2", retrieval_2, len(retrieval)),
+        metric("Poison Retrieval ASR@3", retrieval_3, len(retrieval)),
+        metric("Poison Retrieval ASR@4", retrieval_4, len(retrieval)),
         metric("Poison Retrieval ASR@5", retrieval_5, len(retrieval)),
         metric("Raw generation ASR", raw, len(poisoned)),
         metric("Attack-induced ASR", induced, eligible, "Clean-correct questions only"),
@@ -205,13 +226,17 @@ def main():
         )
     lines += [
         "", "## Provenance defense", "",
-        "| Defense | Detection F1 | Poison ASR@1 | End-to-end accuracy | Utility drop | Attack-induced ASR |",
-        "|---|---:|---:|---:|---:|---:|",
+        "| Defense | Detection F1 | Poison ASR@1 | Poison ASR@2 | Poison ASR@3 | Poison ASR@4 | Poison ASR@5 | End-to-end accuracy | Utility drop | Attack-induced ASR |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in defense:
         lines.append(
             f"| {row['defense_mode']} | {percent(number(row, 'detection_f1'))} "
             f"| {percent(number(row, 'poison_retrieval_asr_at_1'))} "
+            f"| {percent(number(row, 'poison_retrieval_asr_at_2'))} "
+            f"| {percent(number(row, 'poison_retrieval_asr_at_3'))} "
+            f"| {percent(number(row, 'poison_retrieval_asr_at_4'))} "
+            f"| {percent(number(row, 'poison_retrieval_asr_at_5'))} "
             f"| {percent(number(row, 'end_to_end_accuracy'))} "
             f"| {percent(number(row, 'utility_drop_from_clean'))} "
             f"| {percent(number(row, 'attack_induced_asr'))} |"

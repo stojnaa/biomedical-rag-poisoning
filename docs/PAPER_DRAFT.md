@@ -5,7 +5,7 @@ University of Belgrade, School of Electrical Engineering
 
 ## Abstract
 
-Retrieval-augmented generation can improve biomedical question answering by grounding a language model in retrieved literature, but it also introduces a path for knowledge-poisoning attacks. We evaluate a targeted passage-injection attack against a biomedical RAG pipeline based on BM25, PubMedQA, and GPT-4o mini. The main experiment uses 100 held-out binary questions and adds one synthetic counterfactual passage per question. The poison passage entered the top retrieval position for 84% of questions and the top five for all questions. End-to-end accuracy decreased from 77% to 17%, a 60-percentage-point drop with a paired bootstrap 95% confidence interval of 51–69 points. The attack-induced success rate was 77.92% on questions eligible for a prediction change. A PMID allowlist provided no protection because forged passages reused valid identifiers, whereas exact content-hash verification rejected all synthetic poisons and restored clean accuracy in this controlled setting. These results demonstrate that source identifiers alone are insufficient for biomedical RAG integrity and that cryptographic verification is effective when a trusted canonical corpus is available.
+Retrieval-augmented generation can improve biomedical question answering by grounding a language model in retrieved literature, but it also introduces a path for knowledge-poisoning attacks. We evaluate a targeted passage-injection attack against a biomedical RAG pipeline based on BM25, PubMedQA, and GPT-4o mini. The main experiment uses 100 held-out binary questions and adds one synthetic counterfactual passage per question. The poison passage achieved Retrieval ASR@1–5 of 84%, 99%, 100%, 100%, and 100%, respectively. End-to-end accuracy decreased from 77% to 17%, a 60-percentage-point drop with a paired bootstrap 95% confidence interval of 51–69 points. The attack-induced success rate was 77.92% on questions eligible for a prediction change. A PMID allowlist provided no protection because forged passages reused valid identifiers, whereas exact content-hash verification rejected all synthetic poisons and restored clean accuracy in this controlled setting. These results demonstrate that source identifiers alone are insufficient for biomedical RAG integrity and that cryptographic verification is effective when a trusted canonical corpus is available.
 
 **Keywords:** retrieval-augmented generation, data poisoning, biomedical question answering, provenance, PubMedQA
 
@@ -25,7 +25,7 @@ We use the 1,000 labeled examples in PubMedQA PQA-L. A 20-question balanced pilo
 
 ### 2.2 RAG pipeline
 
-Documents are ranked using BM25, and the top five contexts are supplied to `gpt-4o-mini-2024-07-18`. The prompt restricts the model to the retrieved biomedical documents and requires exactly one binary answer. Temperature is set to zero. Clean retrieval is evaluated with Recall@1, Recall@5, and mean reciprocal rank; generation is evaluated with exact-match accuracy.
+Documents are ranked using BM25, and the top five contexts are supplied to `gpt-4o-mini-2024-07-18`. The prompt restricts the model to the retrieved biomedical documents and requires exactly one binary answer. Temperature is set to zero. The poison passage achieved Retrieval ASR@1–5 of 84%, 99%, 100%, 100%, and 100%, respectively.
 
 ### 2.3 Poisoning attack
 
@@ -43,16 +43,15 @@ We report Wilson 95% confidence intervals for proportions. The clean-versus-pois
 
 ## 3. Results
 
-Clean BM25 retrieval achieved 98% Recall@1, 100% Recall@5, and 0.99 MRR. Clean end-to-end accuracy was 77% (95% CI: 67.85–84.16%). Under attack, the target poison reached rank one for 84% of questions and the top five for all questions. Accuracy fell to 17% (95% CI: 10.89–25.55%), yielding a 60-point drop (paired bootstrap 95% CI: 51–69 points). The exact McNemar test confirmed a significant change ($p<0.001$). Raw ASR was 83%, while attack-induced ASR was 60/77, or 77.92%.
-
+Clean BM25 retrieval achieved Recall@1–5 of 98%, 100%, 100%, 100%, and 100%, respectively, with an MRR of 0.99. Clean end-to-end accuracy was 77% (95% CI: 67.85–84.16%). Under attack, target-poison Retrieval ASR@1–5 was 84%, 99%, 100%, 100%, and 100%, while original-document Recall@1–5 was 16%, 97%, 100%, 100%, and 100%. Accuracy fell to 17% (95% CI: 10.89–25.55%), yielding a 60-point drop (paired bootstrap 95% CI: 51–69 points). The exact McNemar test confirmed a significant change ($p<0.001$). Raw ASR was 83%, while attack-induced ASR was 60/77, or 77.92%.
 The attack was asymmetric across labels. For gold-`yes` questions, poisoned accuracy was 0% and raw ASR was 100%. For gold-`no` questions, poisoned accuracy was 34% and raw ASR was 66%. When the target poison ranked first, attack-induced ASR was 81.25%; when it ranked below first, it was 61.54%. These subgroup results are descriptive because of their smaller sample sizes.
 
 The PMID allowlist reproduced the undefended result: 17% accuracy and 77.92% attack-induced ASR. Exact content-hash verification rejected all 100 generated poison passages with no clean-document rejection, restored accuracy to 77%, and reduced measured attack-induced ASR to zero.
 
+
 ## 4. Discussion
 
-The results show that a single lexically relevant counterfactual passage can dominate sparse retrieval and strongly influence a grounded language model. The 100% Retrieval ASR@5 indicates that considering several documents does not by itself remove the attack; the generator still receives the poisoned evidence. The difference between rank-one and lower-ranked cases suggests that retrieval position affects influence but does not fully determine it.
-
+The results show that a single lexically relevant counterfactual passage can dominate sparse retrieval and strongly influence a grounded language model. Retrieval ASR increased from 84% at rank one to 99% within the first two results and reached 100% within the first three. However, original-document recall also reached 97% at rank two and 100% at rank three, showing that authentic and poisoned evidence usually coexisted in the generator context. The difference between rank-one and lower-ranked cases suggests that retrieval position affects influence but does not fully determine it.
 Identifier allowlisting failed because an identifier is a claim rather than proof of document integrity. Exact hash verification addressed this failure under a closed-corpus assumption. However, its perfect measured performance should not be interpreted as a universal biomedical misinformation defense. It requires a trusted canonical copy and protects bytes, not scientific validity. Authentic publications may still be incorrect, retracted, low quality, or in conflict with newer evidence.
 
 The study is limited to one sparse retriever, one language model, one binary benchmark, and a targeted attacker who knows the evaluated topics. The balanced main subset is useful for comparison but does not preserve the natural PubMedQA label distribution. Future work should test dense and hybrid retrievers, multiple generators, adaptive paraphrases, multiple-document attack budgets, citation-aware generation, source consensus, retraction metadata, and temporally updated evidence.

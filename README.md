@@ -6,11 +6,12 @@ The project measures retrieval compromise, end-to-end answer manipulation, and t
 
 ## Main findings
 
-- Clean BM25 Recall@1: **98%**
+- Clean BM25 Recall@1–5: **98%, 100%, 100%, 100%, 100%**
 - Clean RAG accuracy: **77%**
-- Poison retrieval ASR@1: **84%**
-- Poison retrieval ASR@5: **100%**
+- Poison retrieval ASR@1–5: **84%, 99%, 100%, 100%, 100%**
+- Original-document Recall@1–5 under attack: **16%, 97%, 100%, 100%, 100%**
 - Poisoned RAG accuracy: **17%**
+- Raw generation ASR: **83%**
 - Attack-induced ASR: **60/77 (77.92%)**
 - Accuracy drop: **60 percentage points**, bootstrap 95% CI **[51, 69]**
 - Exact McNemar test: **p < 0.001**

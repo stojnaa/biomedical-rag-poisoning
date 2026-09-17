@@ -8,16 +8,20 @@ This supports the conclusion that the observed degradation was associated with t
 
 ## Retrieval and generation
 
-The target poison appeared at rank one for 84% of questions and within the top five for 100%. Raw generation ASR was 83%, while attack-induced ASR was 77.92% among the 77 eligible questions.
+On the clean corpus, the relevant PubMedQA document achieved Recall@1 of 98% and Recall@2–5 of 100%. After poison documents were inserted, target-poison Retrieval ASR@1–5 was 84%, 99%, 100%, 100%, and 100%, respectively. The original-document Recall@1–5 under attack was 16%, 97%, 100%, 100%, and 100%.
+
+The sharp increase from 84% ASR@1 to 99% ASR@2 shows that the target poison was almost always one of the first two retrieved documents. At the same time, the original document remained available within the first two positions for 97% of questions and within the first three positions for all questions. Therefore, the generator usually received both authentic and poisoned evidence rather than having the authentic evidence completely removed from its context.
+
+Raw generation ASR was 83%, while attack-induced ASR was 77.92% among the 77 eligible questions.
 
 These metrics answer different questions:
 
-- Retrieval ASR measures whether the attack reached the generator context.
+- Retrieval ASR@k measures whether the target poison appeared within the first `k` retrieved documents.
+- Original-document Recall@k measures whether the authentic target document remained within the first `k` retrieved documents.
 - Raw ASR measures whether the final answer matched the attack target.
 - Attack-induced ASR excludes questions whose clean answer already matched that target.
 
-The difference between 100% Retrieval ASR@5 and 83% Raw ASR shows that retrieving a poison passage does not guarantee control of the final answer. The clean and poison documents can coexist in the context, and the generator may not follow the targeted claim.
-
+The difference between 100% Retrieval ASR@3–5 and 83% Raw ASR shows that retrieving a poison passage does not guarantee control of the final answer. Clean and poison documents can coexist in the context, and the generator may not always follow the targeted false claim.
 ## Subgroup observations
 
 - Gold `yes`: raw ASR 100%, poisoned accuracy 0%, induced ASR 100%.

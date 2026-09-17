@@ -238,11 +238,35 @@ def evaluate_retrieval(
                 "target_poison_id": target_poison_id,
                 "target_poison_rank": target_poison_rank,
                 "target_poison_at_1": target_poison_rank == 1,
+                "target_poison_at_2": (
+                    target_poison_rank is not None
+                    and target_poison_rank <= 2
+                ),
+                "target_poison_at_3": (
+                    target_poison_rank is not None
+                    and target_poison_rank <= 3
+                ),
+                "target_poison_at_4": (
+                    target_poison_rank is not None
+                    and target_poison_rank <= 4
+                ),
                 "target_poison_at_5": (
                     target_poison_rank is not None
                     and target_poison_rank <= TOP_K
                 ),
                 "gold_at_1": gold_rank == 1,
+                "gold_at_2": (
+                    gold_rank is not None
+                    and gold_rank <= 2
+                ),
+                "gold_at_3": (
+                    gold_rank is not None
+                    and gold_rank <= 3
+                ),
+                "gold_at_4": (
+                    gold_rank is not None
+                    and gold_rank <= 4
+                ),
                 "gold_at_5": (
                     gold_rank is not None
                     and gold_rank <= TOP_K
@@ -396,12 +420,37 @@ def main():
             row["target_poison_at_1"]
             for row in retrieval_details
         ) / len(retrieval_details)
+        poison_asr_at_2 = sum(
+            row["target_poison_at_2"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
+        poison_asr_at_3 = sum(
+            row["target_poison_at_3"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
+        poison_asr_at_4 = sum(
+            row["target_poison_at_4"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
         poison_asr_at_5 = sum(
             row["target_poison_at_5"]
             for row in retrieval_details
         ) / len(retrieval_details)
+
         gold_recall_at_1 = sum(
             row["gold_at_1"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
+        gold_recall_at_2 = sum(
+            row["gold_at_2"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
+        gold_recall_at_3 = sum(
+            row["gold_at_3"]
+            for row in retrieval_details
+        ) / len(retrieval_details)
+        gold_recall_at_4 = sum(
+            row["gold_at_4"]
             for row in retrieval_details
         ) / len(retrieval_details)
         gold_recall_at_5 = sum(
@@ -428,8 +477,14 @@ def main():
             "rejected_documents": len(rejected),
             **detection,
             "poison_retrieval_asr_at_1": poison_asr_at_1,
+            "poison_retrieval_asr_at_2": poison_asr_at_2,
+            "poison_retrieval_asr_at_3": poison_asr_at_3,
+            "poison_retrieval_asr_at_4": poison_asr_at_4,
             "poison_retrieval_asr_at_5": poison_asr_at_5,
             "gold_recall_at_1": gold_recall_at_1,
+            "gold_recall_at_2": gold_recall_at_2,
+            "gold_recall_at_3": gold_recall_at_3,
+            "gold_recall_at_4": gold_recall_at_4,
             "gold_recall_at_5": gold_recall_at_5,
             "end_to_end_accuracy": defended_accuracy,
             "utility_drop_from_clean": clean_accuracy - defended_accuracy,
@@ -447,8 +502,14 @@ def main():
         print(f"Detection F1: {detection['detection_f1']:.2%}")
         print(f"False-positive rate: {detection['false_positive_rate']:.2%}")
         print(f"Poison Retrieval ASR@1: {poison_asr_at_1:.2%}")
+        print(f"Poison Retrieval ASR@2: {poison_asr_at_2:.2%}")
+        print(f"Poison Retrieval ASR@3: {poison_asr_at_3:.2%}")
+        print(f"Poison Retrieval ASR@4: {poison_asr_at_4:.2%}")
         print(f"Poison Retrieval ASR@5: {poison_asr_at_5:.2%}")
         print(f"Original Recall@1: {gold_recall_at_1:.2%}")
+        print(f"Original Recall@2: {gold_recall_at_2:.2%}")
+        print(f"Original Recall@3: {gold_recall_at_3:.2%}")
+        print(f"Original Recall@4: {gold_recall_at_4:.2%}")
         print(f"Original Recall@5: {gold_recall_at_5:.2%}")
         print(f"End-to-end accuracy: {defended_accuracy:.2%}")
         print(f"Utility drop from clean: {clean_accuracy - defended_accuracy:.2%}")

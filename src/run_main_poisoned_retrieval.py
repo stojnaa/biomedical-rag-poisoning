@@ -87,8 +87,14 @@ def save_results(results):
         "target_poison_id",
         "target_poison_rank",
         "target_poison_at_1",
+        "target_poison_at_2",
+        "target_poison_at_3",
+        "target_poison_at_4",
         "target_poison_at_5",
         "gold_at_1",
+        "gold_at_2",
+        "gold_at_3",
+        "gold_at_4",
         "gold_at_5",
         "number_of_poisons_in_top_5",
         "top_5_document_ids",
@@ -185,11 +191,35 @@ def main():
             "target_poison_id": target_poison_id,
             "target_poison_rank": target_poison_rank,
             "target_poison_at_1": target_poison_rank == 1,
+            "target_poison_at_2": (
+                target_poison_rank is not None
+                and target_poison_rank <= 2
+            ),
+            "target_poison_at_3": (
+                target_poison_rank is not None
+                and target_poison_rank <= 3
+            ),
+            "target_poison_at_4": (
+                target_poison_rank is not None
+                and target_poison_rank <= 4
+            ),
             "target_poison_at_5": (
                 target_poison_rank is not None
                 and target_poison_rank <= TOP_K
             ),
             "gold_at_1": gold_rank == 1,
+            "gold_at_2": (
+                gold_rank is not None
+                and gold_rank <= 2
+            ),
+            "gold_at_3": (
+                gold_rank is not None
+                and gold_rank <= 3
+            ),
+            "gold_at_4": (
+                gold_rank is not None
+                and gold_rank <= 4
+            ),
             "gold_at_5": (
                 gold_rank is not None
                 and gold_rank <= TOP_K
@@ -217,18 +247,44 @@ def main():
         result["target_poison_at_1"]
         for result in results
     ) / len(results)
+    poison_asr_at_2 = sum(
+        result["target_poison_at_2"]
+        for result in results
+    ) / len(results)
+    poison_asr_at_3 = sum(
+        result["target_poison_at_3"]
+        for result in results
+    ) / len(results)
+    poison_asr_at_4 = sum(
+        result["target_poison_at_4"]
+        for result in results
+    ) / len(results)
     poison_asr_at_5 = sum(
         result["target_poison_at_5"]
         for result in results
     ) / len(results)
+
     gold_recall_at_1 = sum(
         result["gold_at_1"]
+        for result in results
+    ) / len(results)
+    gold_recall_at_2 = sum(
+        result["gold_at_2"]
+        for result in results
+    ) / len(results)
+    gold_recall_at_3 = sum(
+        result["gold_at_3"]
+        for result in results
+    ) / len(results)
+    gold_recall_at_4 = sum(
+        result["gold_at_4"]
         for result in results
     ) / len(results)
     gold_recall_at_5 = sum(
         result["gold_at_5"]
         for result in results
     ) / len(results)
+
     average_poisons_in_top_5 = sum(
         result["number_of_poisons_in_top_5"]
         for result in results
@@ -236,9 +292,17 @@ def main():
 
     print()
     print(f"Target poison Retrieval ASR@1: {poison_asr_at_1:.2%}")
+    print(f"Target poison Retrieval ASR@2: {poison_asr_at_2:.2%}")
+    print(f"Target poison Retrieval ASR@3: {poison_asr_at_3:.2%}")
+    print(f"Target poison Retrieval ASR@4: {poison_asr_at_4:.2%}")
     print(f"Target poison Retrieval ASR@5: {poison_asr_at_5:.2%}")
+
     print(f"Original document Recall@1: {gold_recall_at_1:.2%}")
+    print(f"Original document Recall@2: {gold_recall_at_2:.2%}")
+    print(f"Original document Recall@3: {gold_recall_at_3:.2%}")
+    print(f"Original document Recall@4: {gold_recall_at_4:.2%}")
     print(f"Original document Recall@5: {gold_recall_at_5:.2%}")
+
     print(
         "Average poison documents in top 5: "
         f"{average_poisons_in_top_5:.2f}"

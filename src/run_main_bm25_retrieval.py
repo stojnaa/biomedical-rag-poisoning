@@ -35,6 +35,9 @@ def save_results(results):
         "relevant_pmid",
         "relevant_rank",
         "retrieved_at_1",
+        "retrieved_at_2",
+        "retrieved_at_3",
+        "retrieved_at_4",
         "retrieved_at_5",
         "reciprocal_rank",
         "top_5_pmids",
@@ -101,6 +104,18 @@ def main():
                 "relevant_pmid": relevant_pmid,
                 "relevant_rank": relevant_rank,
                 "retrieved_at_1": relevant_rank == 1,
+                "retrieved_at_2": (
+                    relevant_rank is not None
+                    and relevant_rank <= 2
+                ),
+                "retrieved_at_3": (
+                    relevant_rank is not None
+                    and relevant_rank <= 3
+                ),
+                "retrieved_at_4": (
+                    relevant_rank is not None
+                    and relevant_rank <= 4
+                ),
                 "retrieved_at_5": (
                     relevant_rank is not None
                     and relevant_rank <= TOP_K
@@ -130,6 +145,21 @@ def main():
         for result in results
     ) / len(results)
 
+    recall_at_2 = sum(
+        result["retrieved_at_2"]
+        for result in results
+    ) / len(results)
+
+    recall_at_3 = sum(
+        result["retrieved_at_3"]
+        for result in results
+    ) / len(results)
+
+    recall_at_4 = sum(
+        result["retrieved_at_4"]
+        for result in results
+    ) / len(results)
+
     recall_at_5 = sum(
         result["retrieved_at_5"]
         for result in results
@@ -142,6 +172,9 @@ def main():
 
     print()
     print(f"Recall@1: {recall_at_1:.2%}")
+    print(f"Recall@2: {recall_at_2:.2%}")
+    print(f"Recall@3: {recall_at_3:.2%}")
+    print(f"Recall@4: {recall_at_4:.2%}")
     print(f"Recall@5: {recall_at_5:.2%}")
     print(f"MRR: {mean_reciprocal_rank:.4f}")
     print(f"Results saved to: {OUTPUT_PATH}")
