@@ -41,6 +41,8 @@ python src\run_main_provenance_defense.py
 python src\analyze_main_results.py
 python src\create_publication_artifacts.py
 python src\validate_project.py
+python src\dense_retriever_check.py
+python src\semantic_alignment_check.py  # API
 ```
 
 All API scripts save progress incrementally. Existing output files should be preserved if execution is interrupted.

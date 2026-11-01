@@ -1,0 +1,15 @@
+﻿metric,condition,successes,total,value,ci_95_lower,ci_95_upper
+Poison Retrieval ASR@1,attacked_1100,96,100,0.96,0.9016292856411208,0.9843366960084523
+Poison Retrieval ASR@2,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Poison Retrieval ASR@3,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Poison Retrieval ASR@4,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Poison Retrieval ASR@5,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Gold Recall@1,clean_1000,100,100,1.0,0.9630065017930143,1.0
+Gold Recall@5,clean_1000,100,100,1.0,0.9630065017930143,1.0
+Gold MRR,clean_1000,,100,1.0,,
+Gold Recall@1,attacked_1100,4,100,0.04,0.01566330399154762,0.0983707143588792
+Gold Recall@2,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Gold Recall@3,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Gold Recall@4,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Gold Recall@5,attacked_1100,100,100,1.0,0.9630065017930143,1.0
+Gold MRR,attacked_1100,,100,0.52,,

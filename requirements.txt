@@ -4,3 +4,4 @@ openai>=3.8,<4
 pandas>=2.2,<4
 python-dotenv>=1.0,<2
 requests>=2.32,<3
+sentence-transformers==6.2.0

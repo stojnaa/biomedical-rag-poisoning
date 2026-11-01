@@ -1,0 +1,14 @@
+{
+  "retriever": "sentence-transformers/all-MiniLM-L6-v2",
+  "sentence_transformers_version": "6.2.0",
+  "device": "cpu",
+  "embedding_dimension": 384,
+  "max_sequence_length": 256,
+  "batch_size": 64,
+  "similarity": "cosine via dot product of normalized embeddings",
+  "tie_breaking": "stable sort using fixed corpus order",
+  "evaluation_questions": 100,
+  "clean_documents": 1000,
+  "poison_documents": 100,
+  "attacked_documents": 1100
+}

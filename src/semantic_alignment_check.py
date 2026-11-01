@@ -12,7 +12,8 @@ import time
 from openai import OpenAI
 
 INPUT_PATH = "data/poisoned/main_poison_documents_100.json"  # run this script from the repo root
-OUTPUT_CSV = "semantic_alignment_results.csv"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_CSV = PROJECT_ROOT / "results" / "semantic_alignment_results.csv"
 MODEL = "gpt-4o-mini-2024-07-18"
 
 client = OpenAI()
